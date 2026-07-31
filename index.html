@@ -95,10 +95,13 @@ onclick="restartGame()">Restart</button>
 <script>
 let score=0;let level = 1;
 let highScore = localStorage.getItem("highScore") || 0;
-function startGame(){document.getElementById("highScore").innerText = highScore;
-document.getElementById("menu").style.display="none";
-document.getElementById("game").style.display="block";
-createGrid();
+function startGame(){
+document.getElementById("highScore").innerText = highScore;
+document.getElementById("menu").style.
+display="none";
+document.getElementById("game").style.
+display="block";
+    createGrid();
 }
 
 function createGrid(){
