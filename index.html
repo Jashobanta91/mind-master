@@ -84,16 +84,18 @@ background:#ff1744;
 </div>
 
 <div class="card" id="game">
-<h2>Level 1</h2>
+<h2>Level <span id="level">1</span></
+h2>
 <p>Score: <span id="score">0</span></p>
-
+<p>High Score: <span id="highScore">0</span></p><button 
+onclick="restartGame()">Restart</button>
 <div class="grid" id="grid"></div>
 </div>
 
 <script>
-let score=0;
-
-function startGame(){
+let score=0;let level = 1;
+let highScore = localStorage.getItem("highScore") || 0;
+function startGame(){document.getElementById("highScore").innerText = highScore;
 document.getElementById("menu").style.display="none";
 document.getElementById("game").style.display="block";
 createGrid();
@@ -111,14 +113,34 @@ if(i===random){
 b.classList.add("diff");
 b.onclick=function(){
 score+=10;
-document.getElementById("score").innerText=score;
-alert("Correct! 🎉");
-createGrid();
+if(score % 50 === 0){
+    level++;
+document.getElementById("level").inner
+Text = level;
 }
+document.getElementById("score").inner
+Text=score;
+if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("highScore", 
+highScore);
+document.getElementById("highScore").i
+nnerText = highScore;
+}
+createGrid();
 }else{
 b.onclick=function(){
 alert("Wrong! Try Again");
 }
+}function restartGame(){
+    score = 0;
+    level = 1;
+document.getElementById("score").in
+nerText = score;
+  
+document.getElementById("level").in
+nerText = level;   
+    createGrid();
 }
 grid.appendChild(b);
 }
