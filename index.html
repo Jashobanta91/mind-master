@@ -6,9 +6,14 @@
 <title>Mind Master</title>
 
 <style>
-body{
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial,sans-serif;
+}
+
+body{
 background:linear-gradient(135deg,#0f172a,#1e3a8a,#7c3aed);
 display:flex;
 justify-content:center;
@@ -18,29 +23,25 @@ color:white;
 }
 
 .card{
-text-align:center;
-padding:30px;
+width:90%;
+max-width:400px;
 background:rgba(255,255,255,.08);
 backdrop-filter:blur(12px);
 border-radius:20px;
-box-shadow:0 0 30px #00e5ff;
-width:90%;
-max-width:400px;
-}
-
-h1{
-font-size:42px;
-text-shadow:0 0 15px cyan;
+padding:20px;
+text-align:center;
+box-shadow:0 0 20px cyan;
 }
 
 button{
-padding:15px 40px;
-font-size:20px;
+padding:12px 25px;
+font-size:18px;
 border:none;
-border-radius:12px;
+border-radius:10px;
+cursor:pointer;
 background:#00e5ff;
 font-weight:bold;
-cursor:pointer;
+margin-top:15px;
 }
 
 #game{
@@ -59,7 +60,7 @@ margin-top:20px;
 width:90px;
 height:90px;
 background:#2196f3;
-border-radius:15px;
+border-radius:12px;
 cursor:pointer;
 }
 
@@ -68,99 +69,91 @@ background:#ff1744;
 }
 </style>
 </head>
-
 <body>
 
 <div class="card" id="menu">
-<h1>🧠 Mind Master</h1>
-<p>Find the different colour.</p>
-<button onclick="startGame()">START</button>
+    <h1>🧠 Mind Master</h1>
+    <p>Find the different coloured box.</p>
+
+    <button onclick="startGame()">START</button>
 </div>
 
 <div class="card" id="game">
-<h2>Level <span id="level">1</span></h2>
-<p>Score: <span id="score">0</span></p>
-<p>High Score: <span id="highScore">0</span></p>
+    <h2>Level <span id="level">1</span></h2>
 
-<button onclick="restartGame()">Restart</button>
+    <p>Score: <span id="score">0</span></p>
 
-<div class="grid" id="grid"></div>
+    <p>High Score: <span id="highScore">0</span></p>
+
+    <button onclick="restartGame()">Restart</button>
+
+    <div class="grid" id="grid"></div>
 </div>
 
 <script>
-let score=0;
-let level=1;
-let highScore=localStorage.getItem("highScore")||0;
+let score = 0;
+let level = 1;
+let highScore = localStorage.getItem("highScore") || 0;
 
-document.getElementById("highScore").innerText=highScore;
+document.getElementById("highScore").innerText = highScore;
 
-function startGame(){
-document.getElementById("menu").style.display="none";
-document.getElementById("game").style.display="block";
-createGrid();
-}
-    function createGrid(){
-
-const grid=document.getElementById("grid");
-grid.innerHTML="";
-
-let random=Math.floor(Math.random()*9);
-
-for(let i=0;i<9;i++){
-
-let b=document.createElement("div");
-b.className="box";
-
-if(i===random){
-
-b.classList.add("diff");
-
-b.onclick=function(){
-
-score+=10;
-
-if(score%50===0){
-level++;
-document.getElementById("level").innerText=level;
+function startGame() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("game").style.display = "block";
+    createGrid();
 }
 
-document.getElementById("score").innerText=score;
+function createGrid() {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
 
-if(score>highScore){
-highScore=score;
-localStorage.setItem("highScore",highScore);
-document.getElementById("highScore").innerText=highScore;
+    const random = Math.floor(Math.random() * 9);
+
+    for (let i = 0; i < 9; i++) {
+        const box = document.createElement("div");
+        box.className = "box";
+
+        if (i === random) {
+            box.classList.add("diff");
+        }
+
+        box.onclick = function () {
+            if (i === random) {
+                score += 10;
+
+                if (score % 50 === 0) {
+                    level++;
+                }
+
+                document.getElementById("score").innerText = score;
+                document.getElementById("level").innerText = level;
+
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem("highScore", highScore);
+                    document.getElementById("highScore").innerText = highScore;
+                }
+
+                createGrid();
+            } else {
+                alert("Wrong! Try Again");
+            }
+        };
+
+        grid.appendChild(box);
+    }
 }
 
-createGrid();
+function restartGame() {
+    score = 0;
+    level = 1;
 
-};
+    document.getElementById("score").innerText = score;
+    document.getElementById("level").innerText = level;
 
-}else{
-
-b.onclick=function(){
-alert("Wrong! Try Again");
-};
-
-}
-
-grid.appendChild(b);
-
-}
-
-    }function restartGame(){
-
-score=0;
-level=1;
-
-document.getElementById("score").innerText=score;
-document.getElementById("level").innerText=level;
-
-createGrid();
-
-}
-
-</script>
+    createGrid();
+        }
+    </script>
 
 </body>
 </html>
