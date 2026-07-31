@@ -110,7 +110,8 @@ grid.innerHTML="";
 let random=Math.floor(Math.random()*9);
 
 for(let i=0;i<9;i++){
-let b=document.createElement("div");
+    let
+b=document.createElement("div");
 b.className="box";
 if(i===random){
 b.classList.add("diff");
@@ -132,22 +133,30 @@ nnerText = highScore;
 }
 createGrid();
 }else{
-b.onclick=function(){
+    b.onclick=function(){
+        alert("Wrong! Try Again");
+    }
 }
-function restartGame(){
-    score = 0;
-    level = 1;
-document.getElementById("score").in
-nerText = score;
+    function restartGame(){
+        score = 0;
+        level = 1;
+document.getElementById("score").inner
+Text = score;
   
 document.getElementById("level").in
 nerText = level;   
-    createGrid();
+        createGrid();
 }
 grid.appendChild(b);
 }
 }
-</script>
-
-</body>
-</html>
+function restartGame(){
+    score = 0;
+    level = 1;
+    
+document.getElementById("score").inner
+Text = score;
+document.getElementById("level").inner
+Text = level; 
+         createGrid();
+     }
