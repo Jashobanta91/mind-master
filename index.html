@@ -1,164 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mind Master</title>
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#0f172a,#1e3a8a,#7c3aed);
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
-color:white;
-}
-.card{
-text-align:center;
-padding:30px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-border-radius:20px;
-box-shadow:0 0 30px #00e5ff;
-width:90%;
-max-width:400px;
-}
-h1{
-font-size:42px;
-text-shadow:0 0 15px cyan;
-animation:glow 1.5s infinite alternate;
-}
-@keyframes glow{
-from{opacity:.6;}
-to{opacity:1;text-shadow:0 0 30px #00ffff;}
-}
-button{
-padding:15px 40px;
-font-size:20px;
-border:none;
-border-radius:12px;
-background:#00e5ff;
-cursor:pointer;
-font-weight:bold;
-transition:.3s;
-}
-button:hover{
-transform:scale(1.1);
-background:#00ff99;
-}
-#game{
-display:none;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(3,90px);
-gap:10px;
-justify-content:center;
-margin-top:20px;
-}
-.box{
-width:90px;
-height:90px;
-background:#2196f3;
-border-radius:15px;
-cursor:pointer;
-transition:.2s;
-}
-.box:hover{
-transform:scale(1.08);
-}
-.diff{
-background:#ff1744;
-}
-</style>
-</head>
-<body>
-
-<div class="card" id="menu">
-    <h1>🧠 Mind Master</h1>
-    <p>Find the different colour.</
-p>
-    <button 
-onclick="startGame()">START</button>
-</div>
-    
-<div class="card" id="game">
-<h2>Level <span id="level">1</span></
-h2>
-<p>Score: <span id="score">0</span></p>
-<p>High Score: <span id="highScore">0</span></p><button 
-onclick="restartGame()">Restart</button>
-<div class="grid" id="grid"></div>
-</div>
-
-<script>
-let score=0;let level = 1;
+let score = 0;
+let level = 1;
 let highScore = localStorage.getItem("highScore") || 0;
-function startGame(){
-    
-document.getElementById("menu").style.
-display = "none";
-document.getElementById("game").style.
-display = "block";
+
+document.getElementById("highScore").innerText = highScore;
+
+function startGame() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("game").style.display = "block";
     createGrid();
 }
 
-function createGrid(){
-let grid=document.getElementById("grid");
-grid.innerHTML="";
-let random=Math.floor(Math.random()*9);
+function createGrid() {
+    let grid = document.getElementById("grid");
+    grid.innerHTML = "";
 
-for(let i=0;i<9;i++){
-    let
-b=document.createElement("div");
-b.className="box";
-if(i===random){
-b.classList.add("diff");
-b.onclick=function(){
-score+=10;
-if(score % 50 === 0){
-    level++;
-document.getElementById("level").inner
-Text = level;
-}
-document.getElementById("score").inner
-Text=score;
-if (score > highScore) {
-    highScore = score;
-    localStorage.setItem("highScore", 
-highScore);
-document.getElementById("highScore").i
-nnerText = highScore;
-}
-createGrid();
-}else{
-    b.onclick=function(){
-        alert("Wrong! Try Again");
+    let random = Math.floor(Math.random() * 9);
+
+    for (let i = 0; i < 9; i++) {
+        let b = document.createElement("div");
+        b.className = "box";
+
+        if (i === random) {
+            b.classList.add("diff");
+
+            b.onclick = function () {
+                score += 10;
+
+                if (score % 50 === 0) {
+                    level++;
+                }
+
+                document.getElementById("score").innerText = score;
+                document.getElementById("level").innerText = level;
+
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem("highScore", highScore);
+                    document.getElementById("highScore").innerText = highScore;
+                }
+
+                createGrid();
+            };
+        } else {
+            b.onclick = function () {
+                alert("Wrong! Try Again");
+            };
+        }
+
+        grid.appendChild(b);
     }
 }
-    function restartGame(){
-        score = 0;
-        level = 1;
-document.getElementById("score").inner
-Text = score;
-  
-document.getElementById("level").in
-nerText = level;   
-        createGrid();
-}
-grid.appendChild(b);
-}
-}
-function restartGame(){
+
+function restartGame() {
     score = 0;
     level = 1;
-    
-document.getElementById("score").inner
-Text = score;
-document.getElementById("level").inner
-Text = level; 
-         createGrid();
-     }
+
+    document.getElementById("score").innerText = score;
+    document.getElementById("level").innerText = level;
+
+    createGrid();
+}
