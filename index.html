@@ -80,8 +80,8 @@ background:#ff1744;
 <div class="card" id="menu">
 <h1>🧠 Mind Master</h1>
 <p>Find the different colour.</p>
-<button onclick="startGame()">START</button>
-</div>
+<button onclick="startGame()">START</
+button>
 
 <div class="card" id="game">
 <h2>Level <span id="level">1</span></
@@ -96,11 +96,11 @@ onclick="restartGame()">Restart</button>
 let score=0;let level = 1;
 let highScore = localStorage.getItem("highScore") || 0;
 function startGame(){
-document.getElementById("highScore").innerText = highScore;
+    
 document.getElementById("menu").style.
-display="none";
+display = "none";
 document.getElementById("game").style.
-display="block";
+display = "block";
     createGrid();
 }
 
@@ -134,7 +134,7 @@ createGrid();
 }else{
 b.onclick=function(){
 }
-}function restartGame(){
+function restartGame(){
     score = 0;
     level = 1;
 document.getElementById("score").in
