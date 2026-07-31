@@ -11,19 +11,21 @@ function startGame() {
 }
 
 function createGrid() {
-    let grid = document.getElementById("grid");
+    const grid = document.getElementById("grid");
     grid.innerHTML = "";
 
-    let random = Math.floor(Math.random() * 9);
+    const random = Math.floor(Math.random() * 9);
 
     for (let i = 0; i < 9; i++) {
-        let b = document.createElement("div");
-        b.className = "box";
+        const box = document.createElement("div");
+        box.className = "box";
 
         if (i === random) {
-            b.classList.add("diff");
+            box.classList.add("diff");
+        }
 
-            b.onclick = function () {
+        box.onclick = function () {
+            if (i === random) {
                 score += 10;
 
                 if (score % 50 === 0) {
@@ -40,14 +42,12 @@ function createGrid() {
                 }
 
                 createGrid();
-            };
-        } else {
-            b.onclick = function () {
+            } else {
                 alert("Wrong! Try Again");
-            };
-        }
+            }
+        };
 
-        grid.appendChild(b);
+        grid.appendChild(box);
     }
 }
 
