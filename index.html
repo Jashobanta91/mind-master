@@ -99,6 +99,9 @@ background:#ff1744;
     <div class="grid" id="grid"></div>
 </div>
 <audio id="bgMusic" src="bgmusic.mp3" loop></audio>
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="correctSound" src="correct.mp3"></audio>
+<audio id="wrongSound" src="wrong.mp3"></audio>
 <script>
 let score = 0;
 let level = 1;
@@ -130,7 +133,7 @@ function createGrid() {
         box.onclick = function () {
             if (i === random) {
                 score += 10;
-
+        
                 if (score % 50 === 0) {
                     level++;
                 }
@@ -146,6 +149,7 @@ function createGrid() {
 
                 createGrid();
             } else {
+            
                 alert("Wrong! Try Again");
             }
         };
@@ -155,6 +159,7 @@ function createGrid() {
 }
 
 function restartGame() {
+
     score = 0;
     level = 1;
 
