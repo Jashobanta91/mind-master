@@ -98,7 +98,7 @@ background:#ff1744;
 
     <div class="grid" id="grid"></div>
 </div>
-
+<audio id="bgMusic" src="bgmusic.mp3" loop></audio>
 <script>
 let score = 0;
 let level = 1;
@@ -107,6 +107,7 @@ let highScore = localStorage.getItem("highScore") || 0;
 document.getElementById("highScore").innerText = highScore;
 
 function startGame() {
+    document.getElementById("bgMusic").play();
     document.getElementById("menu").style.display = "none";
     document.getElementById("game").style.display = "block";
     createGrid();
