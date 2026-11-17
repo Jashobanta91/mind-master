@@ -1,0 +1,28 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "jashobanta91.github",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "jashobanta91.github",
+  "start_url": "/",
+  "theme_color": "rgb(35, 88, 51)",
+  "icons": [
+    {
+      "src": "https://jashobanta91.github.io/mind-master/favicon.png",
+      "type": "image/png",
+      "sizes": "1254x1254",
+      "isSquare": true,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 1254,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "Mind master ",
+  "description": "Challenge your mind with [mind-master], a fun and engaging puzzle game. Solve tricky levels, unlock new stages, and test your skills anytime, anywhere.\""
+}
